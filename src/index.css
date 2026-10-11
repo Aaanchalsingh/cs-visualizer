@@ -3,36 +3,83 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-gray-950 text-gray-100 font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+  :root {
+    --bg-primary:    #ffffff;
+    --bg-secondary:  #f8fafc;
+    --bg-tertiary:   #f1f5f9;
+    --bg-card:       #ffffff;
+    --border:        #e2e8f0;
+    --text-primary:  #0f172a;
+    --text-secondary:#475569;
+    --text-muted:    #94a3b8;
   }
+
+  .dark {
+    --bg-primary:    #09090b;
+    --bg-secondary:  #111113;
+    --bg-tertiary:   #18181b;
+    --bg-card:       #18181b;
+    --border:        #27272a;
+    --text-primary:  #fafafa;
+    --text-secondary:#a1a1aa;
+    --text-muted:    #52525b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    @apply font-sans antialiased transition-colors duration-200;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  html { scroll-behavior: smooth; }
 }
 
 @layer utilities {
-  .font-mono {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  }
+  .bg-theme-primary   { background-color: var(--bg-primary); }
+  .bg-theme-secondary { background-color: var(--bg-secondary); }
+  .bg-theme-tertiary  { background-color: var(--bg-tertiary); }
+  .bg-theme-card      { background-color: var(--bg-card); }
+  .border-theme       { border-color: var(--border); }
+  .text-theme-primary { color: var(--text-primary); }
+  .text-theme-secondary { color: var(--text-secondary); }
+  .text-theme-muted   { color: var(--text-muted); }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #111827;
-}
-::-webkit-scrollbar-thumb {
-  background: #374151;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #4B5563;
+/* ── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 99px; }
+.light ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+
+/* ── Mermaid ───────────────────────────────────── */
+.mermaid svg { max-width: 100%; height: auto; }
+
+/* ── Glow effect ───────────────────────────────── */
+.glow {
+  box-shadow: 0 0 0 1px #6366f140, 0 4px 24px #6366f120;
 }
 
-/* Mermaid diagram overrides */
-.mermaid svg {
-  max-width: 100%;
-  height: auto;
+/* ── Code block ────────────────────────────────── */
+.code-block {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+/* ── Scanline overlay (decorative, dark only) ── */
+.dark .scanline::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
 }
