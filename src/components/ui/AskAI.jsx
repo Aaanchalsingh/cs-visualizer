@@ -124,7 +124,7 @@ export default function AskAI({ onResult, loading, error, onClear }) {
           className="mt-3 flex items-center gap-3 text-sm text-gray-400"
         >
           <Loader2 size={14} className="animate-spin text-primary-400" />
-          <span>Gemini is generating your diagram…</span>
+          <span>Gemini is generating your diagram… (retrying if needed)</span>
         </motion.div>
       )}
     </div>
